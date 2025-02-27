@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  activepieces:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build  # Changed to build target to ensure dependencies are installed
+    image: taha-activepieces
+    container_name: activepieces-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/usr/src/app
+      - ~/.activepieces:/root/.activepieces
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    environment:
+      - NODE_ENV=development
+      - AP_QUEUE_MODE=MEMORY
+      - AP_DB_TYPE=SQLITE3
+      - AP_FRONTEND_URL=http://localhost:8080
+      - NX_DAEMON=false
+    command: >
+      sh -c "cd /usr/src/app &&
+             npm ci &&
+             npx nx run-many --target=build --projects=server-api,react-ui --configuration=development &&
+             npx nx serve"
+    tty: true
+    stdin_open: true
