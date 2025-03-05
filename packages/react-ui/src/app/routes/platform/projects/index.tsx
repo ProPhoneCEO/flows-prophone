@@ -399,7 +399,7 @@ export default function ProjectsPage() {
                           e.stopPropagation();
                           e.preventDefault();
                           await setCurrentProject(queryClient, row);
-                          navigate('/settings/general');
+                          navigate('/settings/appearance');
                         }}
                       >
                         <Pencil className="size-4" />

@@ -37,13 +37,13 @@ export default function ProjectSettingsLayout({
     //   href: authenticationSession.appendProjectRoutePrefix('/settings/general'),
     //   icon: <Settings size={iconSize} />,
     // },
-    {
-      title: t('Appearance'),
-      href: authenticationSession.appendProjectRoutePrefix(
-        '/settings/appearance',
-      ),
-      icon: <SunMoon size={iconSize} />,
-    },
+    // {
+    //   title: t('Appearance'),
+    //   href: authenticationSession.appendProjectRoutePrefix(
+    //     '/settings/appearance',
+    //   ),
+    //   icon: <SunMoon size={iconSize} />,
+    // },
     // {
     //   title: t('Team'),
     //   href: authenticationSession.appendProjectRoutePrefix('/settings/team'),

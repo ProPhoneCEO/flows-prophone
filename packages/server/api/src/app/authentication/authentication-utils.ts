@@ -20,48 +20,50 @@ export const authenticationUtils = {
     },
 
     async getProjectAndToken(params: GetProjectAndTokenParams): Promise<AuthenticationResponse> {
-        const user = await userService.getOneOrFail({ id: params.userId })
-        const user_1 = await userService.getMetaInformation({ id: params.userId })
-        let projects = await projectService.getAllForUser({
+        const user = await userService.getOneOrFail({ id: params.userId });
+        const userMeta = await userService.getMetaInformation({ id: params.userId });
+    
+        // Check if the user already has an existing project
+        let project = await projectService.getOneByOwnerAndPlatform({
+            ownerId: params.userId,
             platformId: params.platformId,
-            userId: params.userId,
-        })
-        let project = isNil(params.projectId) ? projects?.[0] : projects.find((project) => project.id === params.projectId)
-        if (isNil(project) && projects.length === 0) {
+        });
+    
+        if (isNil(project)) {
             project = await projectService.create({
-                displayName: `${user_1.firstName || 'User'}'s Project`,
+                displayName: `${userMeta.firstName || 'User'}'s Project`,
                 ownerId: user.id,
                 platformId: params.platformId,
             });
-        
-            projects = [project];
         }
-        
-        // Ensure project is not undefined before using it
+    
+        // Ensure the project exists
         if (!project) {
             throw new ActivepiecesError({
                 code: ErrorCode.SIGN_UP_DISABLED,
                 params: {},
             });
         }
-        
-        const identity = await userIdentityService(system.globalLogger()).getOneOrFail({ id: user.identityId })
+    
+        const identity = await userIdentityService(system.globalLogger()).getOneOrFail({ id: user.identityId });
         if (!identity.verified) {
             throw new ActivepiecesError({
                 code: ErrorCode.EMAIL_IS_NOT_VERIFIED,
                 params: {
                     email: identity.email,
                 },
-            })
+            });
         }
+    
         if (user.status === UserStatus.INACTIVE) {
             throw new ActivepiecesError({
                 code: ErrorCode.USER_IS_INACTIVE,
                 params: {
                     email: identity.email,
                 },
-            })
+            });
         }
+    
         const token = await accessTokenManager.generateToken({
             id: user.id,
             type: PrincipalType.USER,
@@ -70,7 +72,8 @@ export const authenticationUtils = {
                 id: params.platformId,
             },
             tokenVersion: identity.tokenVersion,
-        })
+        });
+    
         return {
             ...user,
             firstName: identity.firstName,
@@ -81,8 +84,9 @@ export const authenticationUtils = {
             verified: identity.verified,
             token,
             projectId: project.id,
-        }
+        };
     },
+    
 
     async assertDomainIsAllowed({
         email,

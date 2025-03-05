@@ -138,3 +138,28 @@
   /* If necessary, add !important to the rule */
   pointer-events: none !important;
 }
+
+button[role="checkbox"] {
+  border-color: #F9B642 !important;
+}
+
+button[role="checkbox"][data-state="checked"] {
+  background-color: #F9B642 !important;
+  color: white !important;
+}
+
+.text-primary {
+  color: #9D5316 !important;
+}
+
+.hover\:text-muted-foreground:hover {
+    color: #9D5316 !important;
+}
+
+.hover\:text-primary:hover {
+    color: #9D5316 !important;
+}
+
+.hover\:text-primary-foreground:hover {
+    color: #9D5316 !important;
+}
