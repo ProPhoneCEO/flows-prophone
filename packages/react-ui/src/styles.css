@@ -163,3 +163,15 @@ button[role="checkbox"][data-state="checked"] {
 .hover\:text-primary-foreground:hover {
     color: #9D5316 !important;
 }
+.border-primary{
+  border-color : #F9B642 !important;
+}
+.data-\[state\=checked\]\:bg-primary[data-state=checked] {
+  background-color:  #F9B642 !important;
+}
+.hover\:border-primary:hover {
+  border-color : #F9B642 !important;
+}
+.focus-within\:ring-ring:focus-within {
+  --tw-ring-color: #F9B642 !important;
+}

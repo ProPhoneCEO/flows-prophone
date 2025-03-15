@@ -234,42 +234,10 @@ const routes = [
     ),
   }),
   {
-    path: '/forget-password',
-    element: (
-      <PageTitle title="Forget Password">
-        <ResetPasswordPage />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/reset-password',
-    element: (
-      <PageTitle title="Reset Password">
-        <ChangePasswordPage />
-      </PageTitle>
-    ),
-  },
-  {
     path: '/sign-in',
     element: (
       <PageTitle title="Sign In">
         <SignInPage />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/verify-email',
-    element: (
-      <PageTitle title="Verify Email">
-        <VerifyEmail />
-      </PageTitle>
-    ),
-  },
-  {
-    path: '/sign-up',
-    element: (
-      <PageTitle title="Sign Up">
-        <SignUpPage />
       </PageTitle>
     ),
   },

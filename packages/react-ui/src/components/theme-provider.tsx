@@ -54,7 +54,7 @@ export function ThemeProvider({
 
     const resolvedTheme = theme === 'system' ? 'light' : theme;
     root.classList.remove('light', 'dark');
-    document.title = branding.websiteName;
+    document.title = "ProPhone | Flows";
     document.documentElement.style.setProperty(
       '--primary',
       colorsUtils.hexToHslString(branding.colors.primary.default),

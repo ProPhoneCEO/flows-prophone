@@ -11,7 +11,7 @@ const PageTitle = ({ title, children }: PageTitleProps) => {
   const websiteBranding = flagsHooks.useWebsiteBranding();
 
   useEffect(() => {
-    document.title = `${title} | ${websiteBranding.websiteName}`;
+    document.title = "ProFlow | Workflow Automation System";
   }, [title, websiteBranding.websiteName]);
 
   return children;

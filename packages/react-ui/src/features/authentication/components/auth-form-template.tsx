@@ -86,33 +86,7 @@ const AuthFormTemplate = React.memo(
 
     return (
       <Card className="w-[28rem] rounded-sm drop-shadow-xl">
-        {!showCheckYourEmailNote && (
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">{data.title}</CardTitle>
-            <CardDescription>{data.description}</CardDescription>
-          </CardHeader>
-        )}
-
-        <CardContent>
-          {!showCheckYourEmailNote && <ThirdPartyLogin isSignUp={isSignUp} />}
-          <AuthSeparator
-            isEmailAuthEnabled={
-              (isEmailAuthEnabled ?? true) && !showCheckYourEmailNote
-            }
-          ></AuthSeparator>
-          {isEmailAuthEnabled ? (
-            isSignUp ? (
-              <SignUpForm
-                setShowCheckYourEmailNote={setShowCheckYourEmailNote}
-                showCheckYourEmailNote={showCheckYourEmailNote}
-              />
-            ) : (
-              <SignInForm />
-            )
-          ) : null}
-        </CardContent>
-
-        <BottomNote isSignup={isSignUp}></BottomNote>
+        <SignInForm />
       </Card>
     );
   },
